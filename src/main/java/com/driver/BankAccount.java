@@ -18,8 +18,29 @@ public class BankAccount {
         //Generate account number having given number of 'digits' such that the sum of digits is equal to 'sum'
         //If it is not possible, throw "Account Number can not be generated" exception
 
+        StringBuilder accountNo = new StringBuilder();
+        int j = (int) Math.ceil((double) sum / digits);
 
-        return null;
+        if (j <= 9) {
+            int i = j;
+            while (digits > 0 && sum >= 0) {
+                if (i > 9)
+                    i = j;
+                if (sum < i)
+                    i = sum;
+
+                accountNo.append(i);
+                sum -= i;
+
+                ++i;
+                --digits;
+            }
+
+            return accountNo.toString();
+        }
+        else
+            throw new Exception("Account Number can not be generated");
+
     }
 
     public void deposit(double amount) {
